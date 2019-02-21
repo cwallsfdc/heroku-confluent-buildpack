@@ -55,13 +55,16 @@ if [ -x "./properties-generate" ]; then
 else
     echo "properties-generate not found"
 fi
-echo "confluent.properties:"
-cat confluent.properties
 echo "####"
 
 sed -i -e "s/%PORT%/\${PORT}/g" confluent.properties
 
 trap "bin/${CONFLUENT_COMPONENT}-stop" SIGINT SIGTERM
+
+echo "####"
+echo "confluent.properties:"
+cat confluent.properties
+echo "####"
 
 bin/${CONFLUENT_COMPONENT}-start confluent.properties
 EOF
