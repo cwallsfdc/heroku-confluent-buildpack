@@ -48,7 +48,11 @@ cat > ${BUILD_DIR}/bin/run-confluent <<EOF
 #!/usr/bin/env bash
 
 if [ -x "./properties-generate" ]; then
+    echo "properties-generate found"
+    cat ./properties-generate
     ./properties-generate > confluent.properties
+else
+    echo "properties-generate not found"
 fi
 
 sed -i -e "s/%PORT%/\${PORT}/g" confluent.properties
